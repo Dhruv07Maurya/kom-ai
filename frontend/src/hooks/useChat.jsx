@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const backendUrl ="https:/kom-ai.onrender.com";
+const backendUrl ="https://kom-ai.onrender.com";
 
 const ChatContext = createContext();
 
