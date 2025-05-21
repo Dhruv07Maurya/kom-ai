@@ -102,7 +102,8 @@ app.post("/chat", async (req, res) => {
     // First, use Groq to determine if the query is related to the knowledge base domain
     const domainCheckPrompt = `
     You are a filter that determines if a query is related to the following domain:
-    
+    your name is kom ai {you are Kom AI, a virtual assistant for IDMS ERP system}
+    avoid outside question that is not from knowlede base
     - IDMS ERP system
     - ERP modules like Sales, Purchase, Inventory, Production, etc.
     - GST Integration
@@ -133,7 +134,7 @@ app.post("/chat", async (req, res) => {
     if (!isDomainRelevant && knowledgeBase) {
       const messages = [
         {
-          text: "I'm specialized in IDMS ERP systems and GST integration. I don't have information on topics outside this domain. Can I help you with any IDMS or GST related questions?",
+          text: "I'm Kom Ai specialized in IDMS ERP systems and GST integration. I don't have information on topics outside this domain. Can I help you with any IDMS or GST related questions?",
           facialExpression: "smile",
           animation: "Talking_0",
         },
@@ -159,13 +160,14 @@ app.post("/chat", async (req, res) => {
 
     // Prepare the system prompt with knowledge base content
     const systemPrompt = `
+    your name is kom ai {you are Kom AI, a virtual assistant for IDMS ERP system}
     You are a virtual assistant specialized in the IDMS ERP system.
     You will always reply with a JSON array of messages. With a maximum of 3 messages.
     Each message has a text, facialExpression, and animation property.
     The different facial expressions are: smile, sad, angry, surprised, funnyFace, and default.
     The different animations are: Talking_0, Talking_1, Talking_2, Crying, Laughing, Rumba, Idle, Terrified, and Angry.
     Your response must be a valid JSON object with a 'messages' array.
-    
+    avoid outside question that is not from knowlede base
     IMPORTANT: You must ONLY answer based on the following knowledge base information. If the information to answer the query is not contained here, state that you don't have that specific information in your knowledge base:
     
     ${knowledgeBase}
